@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "name" : "WaterProof",
+  "category" : "Coats and Jackets",
+  "retail_price": 274.0,
+  "discounted_price" : 230.16,
+  "availability" : true
+}

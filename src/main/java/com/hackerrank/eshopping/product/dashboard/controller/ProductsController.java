@@ -49,4 +49,22 @@ public class ProductsController {
         return new ResponseEntity<Product>(updatedProduct, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "", params = {"category"})
+    public ResponseEntity<List<Product>> getProductByCategory(@RequestParam("category") String category)
+            throws RecordNotFoundException {
+
+        List<Product> list = service.getProductByCategory(category);
+
+        return new ResponseEntity<List<Product>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "", params = {"category", "availability"})
+    public ResponseEntity<List<Product>> getProductByCategoryAndAvailability(@RequestParam("category") String category, @RequestParam("availability") Boolean availability)
+            throws RecordNotFoundException {
+
+        List<Product> list = service.getProductByCategoryAndAvailability(category, availability);
+
+        return new ResponseEntity<List<Product>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
 }

@@ -88,4 +88,37 @@ public class ProductsService {
         }
 
     }
+
+    // returns list of products of same category in defined sorted order
+    public List<Product> getProductByCategory(String category) throws RecordNotFoundException {
+
+        Sort sort = Sort.by("availability").descending()
+                .and(Sort.by("discountedPrice").ascending())
+                .and(Sort.by("id").ascending());
+
+
+        List<Product> productList = productsRepository.findByCategory(category, sort);
+
+        if (productList.size() > 0) {
+            return productList;
+        } else {
+            return new ArrayList<Product>();
+        }
+    }
+
+    // returns list of products of same category and specified availability in defined sorted order
+    public List<Product> getProductByCategoryAndAvailability(String category, Boolean availability) throws RecordNotFoundException {
+
+        Sort sort = Sort.by("discountPercentage").descending()
+                .and(Sort.by("discountedPrice").ascending())
+                .and(Sort.by("id").ascending());
+
+        List<Product> productList = productsRepository.findByCategoryAndAvailability(category, availability, sort);
+
+        if (productList.size() > 0) {
+            return productList;
+        } else {
+            return new ArrayList<Product>();
+        }
+    }
 }

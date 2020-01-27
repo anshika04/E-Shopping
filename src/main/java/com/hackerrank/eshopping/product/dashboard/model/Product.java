@@ -1,7 +1,9 @@
 package com.hackerrank.eshopping.product.dashboard.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -28,6 +30,11 @@ public class Product {
 
     @Column(name = "availability", nullable = false)
     private Boolean availability;
+
+    // calculates the discount percentage for each product
+    @Formula("((retail_price - discounted_price) / retail_price) * 100")
+    @JsonIgnore
+    private int discountPercentage;
 
     public Product() {
     }
@@ -95,6 +102,14 @@ public class Product {
 
     public void setAvailability(Boolean availability) {
         this.availability = availability;
+    }
+
+    public int getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(int discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 
     @Override

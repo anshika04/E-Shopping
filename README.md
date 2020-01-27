@@ -1,6 +1,15 @@
 # E-Shopping
 
 Spring Boot Crud Application with JPA, H2 Database 
+
+<ul>
+<li>Get all Products</li>
+<li>Get product by Id</li>
+<li>Add New Product</li>
+<li>Update existing Product</li>
+<li>Get products based on Category</li>
+<li>Get products based on Category and In-stock Availability</li>
+</ul>
  
 # Product System
 
@@ -42,4 +51,5 @@ commands run the application.
 command to run JUnit test-cases.
 
 Application runs from localhost:8080/products
-Connect to database through localhost:8080/h2-console
+
+Run database through localhost:8080/h2-console

@@ -1,17 +1,46 @@
 package com.hackerrank.eshopping.product.dashboard.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Entity(name = "Product")
+@Table(name = "TBL_PRODUCTS")
 public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "category")
     private String category;
-    private Double retailPrice;
-    private Double discountedPrice;
+
+    @Column(name = "retail_price", nullable = false)
+    private BigDecimal retailPrice;
+
+    @Column(name = "discounted_price", nullable = false)
+    private BigDecimal discountedPrice;
+
+    @Column(name = "availability", nullable = false)
     private Boolean availability;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String category, Double retailPrice, Double discountedPrice, Boolean availability) {
+    @JsonCreator
+    public Product(
+            @JsonProperty("id") Long id,
+            @JsonProperty("name") String name,
+            @JsonProperty("category") String category,
+            @JsonProperty("retail_price") BigDecimal retailPrice,
+            @JsonProperty("discounted_price") BigDecimal discountedPrice,
+            @JsonProperty("availability") Boolean availability) {
+
         this.id = id;
         this.name = name;
         this.category = category;
@@ -44,19 +73,19 @@ public class Product {
         this.category = category;
     }
 
-    public Double getRetailPrice() {
+    public BigDecimal getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(Double retailPrice) {
+    public void setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
     }
 
-    public Double getDiscountedPrice() {
+    public BigDecimal getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(Double discountedPrice) {
+    public void setDiscountedPrice(BigDecimal discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 
@@ -66,5 +95,17 @@ public class Product {
 
     public void setAvailability(Boolean availability) {
         this.availability = availability;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", retailPrice=" + retailPrice +
+                ", discountedPrice=" + discountedPrice +
+                ", availability=" + availability +
+                '}';
     }
 }
